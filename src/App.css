@@ -36,3 +36,204 @@
     transform: rotate(360deg);
   }
 }
+
+.transfer-section {
+  margin-bottom: 20px;
+}
+
+.transfer-input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.transfer-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.transfer-button:hover {
+  background-color: #45a049;
+}
+
+/* app.css */
+
+/* Style for Mint Tokens section */
+.mint-tokens-container {
+  margin-top: 20px;
+}
+
+.mint-tokens-container h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.mint-tokens-container input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.mint-tokens-container button {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mint-tokens-container button:hover {
+  background-color: #45a049;
+}
+
+/* Styles for Burn Tokens section */
+.burn-tokens-container {
+  margin-top: 20px;
+}
+
+.burn-tokens-container h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.burn-tokens-container input {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.burn-tokens-container button {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.burn-tokens-container button:hover {
+  background-color: #45a049;
+}
+
+/* Style for pause/unpause buttons */
+.pause-unpause-container {
+  margin-top: 20px;
+}
+
+.pause-unpause-container button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pause-unpause-container button:hover {
+  background-color: #b92929;
+}
+
+.pause-unpause-container button:disabled {
+  background-color: #34e245;
+  cursor: not-allowed;
+}
+
+/* app.css */
+
+/* Style for the "Stake Tokens" section */
+.stake-tokens-container {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Style for the input fields in the "Stake Tokens" section */
+.stake-input {
+  margin-bottom: 10px;
+}
+
+/* Style for the "Stake" button */
+.stake-button {
+  margin: 5px;
+  padding: 8px;
+  font-size: 16px;
+  background-color:  green; /* Change button background color to green */
+  color: white; /* Change text color to white */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style for the "Stake" button on hover */
+.stake-button:hover {
+  background-color: #45a049;
+}
+
+/* app.css */
+
+/* Style for the withdraw button */
+.withdraw-section button {
+  margin: 5px;
+  padding: 8px;
+  font-size: 16px;
+  background-color:  green; /* Change button background color to green */
+  color: white; /* Change text color to white */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.withdraw-section button:hover {
+  background-color: darkgreen; /* Change button background color on hover */
+}
+
+/* Styles for Multi-Send Tokens section */
+.green-button {
+  background-color: rgb(4, 121, 4);
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-left: 80px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.green-button:hover {
+  background-color: darkgreen;
+}
+.ar-button{
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.am-button{
+  background-color: rgb(4, 121, 4);
+  color: white;
+  padding: 10px 20px;
+  margin-left: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
