@@ -3,12 +3,11 @@ import Web3 from "web3";
 import contractABI from "./abi.json"; // Importing ABI from JSON file
 import "./App.css";
 
-const tokenAddress = "0x006936a7435bD0aF9B27473579ac7A90F4D74b37"; // Replace with your actual token address
+const tokenAddress = "0x3C871A5289ee8DA8A68F8494CFB22031d1573D52"; // Replace with your actual token address
 
 const App = () => {
   const [web3, setWeb3] = useState(undefined);
   const [accounts, setAccounts] = useState([]); 
-  const [selectedAccountIndex, setSelectedAccountIndex] = useState(0); // Default to first account
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
   const [mintAmount, setMintAmount] = useState("");
@@ -41,13 +40,15 @@ const App = () => {
 
 
   const handleTransfer = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
 
     try {
+      const amountInWei = web3.utils.toWei(amount.toString(), 'ether');
+  
       await contract.methods
-        .transfer(recipient, amount)
-        .send({ from: accounts[selectedAccountIndex] });
+        .transfer(recipient, amountInWei)
+        .send({ from: accounts[0] });
       alert("Transfer successful");
     } catch (error) {
       console.error("Error during the transfer", error);
@@ -56,18 +57,18 @@ const App = () => {
   };
 
   const handleMint = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
   
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
   
     try {
       const owner = await contract.methods.owner().call(); // Get the owner address from the contract
-      if (accounts[selectedAccountIndex] !== owner) { // Check if the current account is not the owner
+      if (accounts[0] !== owner) { // Check if the current account is not the owner
         alert("Only the owner account can mint tokens"); // Show alert warning for non-owner accounts
         return; // Exit the function
       }
   
-      await contract.methods.mint(mintAmount).send({ from: accounts[selectedAccountIndex] });
+      await contract.methods.mint(mintAmount).send({ from: accounts[0] });
       alert("Minting successful");
     } catch (error) {
       console.error("Error during minting", error);
@@ -77,18 +78,18 @@ const App = () => {
   
 
   const handleBurn = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
 
     try {
       const owner = await contract.methods.owner().call(); // Get the owner address from the contract
-      if (accounts[selectedAccountIndex] !== owner) { // Check if the current account is not the owner
+      if (accounts[0] !== owner) { // Check if the current account is not the owner
         alert("Only the owner account can mint tokens"); // Show alert warning for non-owner accounts
         return; // Exit the function
       }
 
       // Fetch the user's token balance
-      const userBalance = await contract.methods.balanceOf(accounts[selectedAccountIndex]).call();
+      const userBalance = await contract.methods.balanceOf(accounts[0]).call();
 
       // Check if the amount to burn exceeds the user's balance
       if (parseInt(burnAmount) > parseInt(userBalance)) {
@@ -97,7 +98,7 @@ const App = () => {
           return;
       }
 
-      await contract.methods.burn(burnAmount).send({ from: accounts[selectedAccountIndex] });
+      await contract.methods.burn(burnAmount).send({ from: accounts[0] });
       alert("Burning successful");
     } catch (error) {
       console.error("Error during burning", error);
@@ -106,11 +107,11 @@ const App = () => {
   };
 
   const handlePause = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
 
     try {
-      await contract.methods.pause().send({ from: accounts[selectedAccountIndex] });
+      await contract.methods.pause().send({ from: accounts[0] });
       alert("Contract paused");
     } catch (error) {
       console.error("Error pausing contract", error);
@@ -119,11 +120,11 @@ const App = () => {
   };
 
   const handleUnpause = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
 
     try {
-      await contract.methods.unpause().send({ from: accounts[selectedAccountIndex] });
+      await contract.methods.unpause().send({ from: accounts[0] });
       alert("Contract unpaused");
     } catch (error) {
       console.error("Error unpausing contract", error);
@@ -132,11 +133,11 @@ const App = () => {
   };
 
   const handleStake = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
 
     try {
-      await contract.methods.stake(stakeAmount).send({ from: accounts[selectedAccountIndex] });
+      await contract.methods.stake(stakeAmount).send({ from: accounts[0] });
       alert("Staking successful");
     } catch (error) {
       console.error("Error during staking", error);
@@ -145,13 +146,13 @@ const App = () => {
   };
 
   const handleWithdraw = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
     const contract = new web3.eth.Contract(contractABI, tokenAddress); // Using imported ABI
 
     try {
       await contract.methods
         .withdraw(withdrawAmount)
-        .send({ from: accounts[selectedAccountIndex] });
+        .send({ from: accounts[0] });
       alert("Withdrawal successful");
     } catch (error) {
       console.error("Error during withdrawal", error);
@@ -160,7 +161,7 @@ const App = () => {
   };
 
   const handleMultiSend = async () => {
-    if (!web3 || !accounts[selectedAccountIndex]) return;
+    if (!web3 || !accounts[0]) return;
   
     // Convert recipient addresses to proper format
     const recipients = multiSendRecipients.map(address => address.trim());
@@ -182,7 +183,7 @@ const App = () => {
 
       await contract.methods
         .multiSend(recipients, amounts)
-        .send({ from: accounts[selectedAccountIndex] });
+        .send({ from: accounts[0] });
   
       alert("Multi-send successful");
       // Clear input fields after successful multi-send
@@ -197,11 +198,7 @@ const App = () => {
 
   return (
     <div>
-      <select value={selectedAccountIndex} onChange={(e) => setSelectedAccountIndex(e.target.value)}>
-                {accounts.map((account, index) => (
-                    <option key={index} value={index}>Account {index + 1}</option>
-                ))}
-            </select>
+    
       <div className="transfer-section">
         <h2>Transfer Tokens</h2>
         <input
